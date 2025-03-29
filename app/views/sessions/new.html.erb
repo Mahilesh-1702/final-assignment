@@ -1,0 +1,23 @@
+<h1>Login</h1>
+
+<% if flash[:alert] %>
+  <p class="alert"><%= flash[:alert] %></p>
+<% end %>
+
+<%= form_with(url: sessions_path, local: true) do |f| %>
+  <div>
+    <%= f.label :email %>
+    <%= f.text_field :email, required: true %>
+  </div>
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password, required: true %>
+  </div>
+  <div>
+    <%= f.label :role, "Are you HR or Employee?" %>
+    <%= f.select :role, ["hr", "employee"], prompt: "Select your role", required: true %>
+  </div>
+  <div>
+    <%= f.submit "Login", class: "btn btn-primary" %>
+  </div>
+<% end %>

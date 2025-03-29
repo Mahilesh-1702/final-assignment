@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Leave Management App" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <% if current_user %>
+          <p>Welcome, <%= current_user.email %>!</p>
+          <%= link_to "Logout", logout_path, method: :delete, class: "btn btn-danger" %>
+        <% else %>
+          <%= link_to "Login", new_session_path, class: "btn btn-primary" %>
+        <% end %>
+      </nav>
+    </header>
+
+    <%= yield %>
+  </body>
+</html>

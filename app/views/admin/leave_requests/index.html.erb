@@ -1,0 +1,41 @@
+<h1>Manage Leave Requests</h1>
+
+<% if @leave_requests.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Employee Email</th>
+        <th>Leave Balance</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @leave_requests.each do |request| %>
+        <tr>
+          <td><%= request.employee&.email || "N/A" %></td>
+          <td><%= request.employee&.leave_balance || "N/A" %></td>
+          <td><%= request.start_date %></td>
+          <td><%= request.end_date %></td>
+          <td><%= request.reason %></td>
+          <td>
+            <span class="badge <%= request.status.downcase %>"><%= request.status %></span>
+          </td>
+          <td>
+            <% if request.status == "Pending" %>
+              <%= button_to "Approve", approve_admin_leave_request_path(request), method: :patch, class: "btn btn-success" %>
+              <%= button_to "Decline", decline_admin_leave_request_path(request), method: :patch, class: "btn btn-danger" %>
+            <% else %>
+              <em>Action Taken</em>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p style="text-align: center;">No leave requests found.</p>
+<% end %>

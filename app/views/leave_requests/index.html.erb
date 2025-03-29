@@ -1,0 +1,42 @@
+<h1>Your Leave Requests</h1>
+
+<!-- Display Employee Leave Balance -->
+<div class="leave-balance">
+  Your Leave Balance: <%= current_user.leave_balance %> days
+</div>
+
+<% if @leave_requests.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th>HR</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @leave_requests.each do |leave_request| %>
+        <tr>
+          <td><%= leave_request.start_date %></td>
+          <td><%= leave_request.end_date %></td>
+          <td><%= leave_request.reason %></td>
+          <td>
+            <!-- Display status with a badge -->
+            <span class="badge <%= leave_request.status.downcase %>"><%= leave_request.status %></span>
+          </td>
+          <td><%= leave_request.hr&.email || "Not Assigned" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p style="text-align: center;">No leave requests found.</p>
+<% end %>
+
+<!-- Actions Section -->
+<div style="text-align: center; margin: 20px;">
+  <%= link_to "Submit a New Leave Request", new_leave_request_path, class: "btn btn-primary" %>
+  <%= button_to "Download Leave Requests (CSV)", export_leave_requests_path(format: :csv), method: :patch, class: "btn btn-secondary" %>
+</div>

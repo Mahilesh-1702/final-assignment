@@ -1,0 +1,12 @@
+<h1>New Leave Request</h1>
+<p>Dear <%= @leave_request.hr.name %>,</p>
+
+<p>You have received a new leave request from <%= @leave_request.employee.name %>.</p>
+<p><strong>Details:</strong></p>
+<ul>
+  <li>Start Date: <%= @leave_request.start_date %></li>
+  <li>End Date: <%= @leave_request.end_date %></li>
+  <li>Reason: <%= @leave_request.reason %></li>
+</ul>
+
+<p>Please log in to review and take action.</p>

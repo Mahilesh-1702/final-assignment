@@ -1,0 +1,10 @@
+<h1>Leave Request Decision</h1>
+<p>Dear <%= @employee.name %>,</p>
+
+<p>Your leave request for the dates <%= @leave_request.start_date %> to <%= @leave_request.end_date %> has been <strong><%= @status %></strong>.</p>
+
+<% if @status == "Approved" %>
+  <p>You now have <%= @employee.leave_balance %> leave days remaining.</p>
+<% end %>
+
+<p>Thank you for using the Leave Management system.</p>

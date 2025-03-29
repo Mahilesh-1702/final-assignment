@@ -1,0 +1,4 @@
+Employee Name,Start Date,End Date,Reason,Status
+<% @leave_requests.each do |request| %>
+<%= request.employee&.name || "N/A" %>,<%= request.start_date %>,<%= request.end_date %>,<%= request.reason %>,<%= request.status %>
+<% end %>
